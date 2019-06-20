@@ -1,0 +1,7 @@
+{
+  "lambda": {
+    "role": "intheclearbackend-executor",
+    "name": "intheclearbackend",
+    "region": "us-east-1"
+  }
+}
