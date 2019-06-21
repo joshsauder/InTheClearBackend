@@ -32,11 +32,11 @@ exports.handler = function (event, context, callback) {
     var actions = coordinatesList.map(reverseGelocateCall);
     Promise.all(actions).then(
         function(values){
-            const cityList = {}
-            values.forEach(function(value,index){
+            const cityList = []
+            values.forEach(function(value){
                 var city = value['address']['City']
                 var state = value['address']['Region']
-                cityList[index+1] = `${city}, ${state}`
+                cityList.push(`${city}, ${state}`)
             })
             return cityList
         }

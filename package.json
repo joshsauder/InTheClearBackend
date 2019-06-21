@@ -10,11 +10,11 @@
   "license": "ISC",
   "devDependencies": {
     "claudia": "^5.5.0",
-    "lambda-tester": "^3.6.0"
+    "lambda-tester": "^3.6.0",
+    "mocha": "^6.1.4"
   },
   "dependencies": {
     "chai": "^4.2.0",
-    "mocha": "^6.1.4",
     "request": "^2.88.0"
   }
 }
