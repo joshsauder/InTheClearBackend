@@ -13,7 +13,6 @@ describe('Weather Per City', function(){
     */
     it( 'send normal directions set', function() {
         this.timeout(3000)
-        const expectedResult = ['Columbus, Ohio', 'Indianapolis, Indiana', 'Vancouver, British Columbia']
         return LambdaTest(lambdaFunction.handler).event({
             list: testJson["test"][0]["List"]
         }).expectResult( (result) =>{
@@ -22,7 +21,7 @@ describe('Weather Per City', function(){
                 expect(result[index]).to.have.property("Conditions")
                 expect(result[index]).to.have.property("Description")
                 expect(result[index]).to.have.property("Temperature")
-                expect(result[index]["coordinates"]).to.equal(testJson["test"][0]["List"][index]["coordinates"])
+                expect(result[index]["Coordinates"]).to.equal(testJson["test"][0]["List"][index]["coordinates"])
             });
         });
     });
@@ -32,7 +31,6 @@ describe('Weather Per City', function(){
     Expect an JSON with 1 cities weather conditions to be returned
     */
     it( 'send one direction set', function(){
-        const expectedResult = ['Columbus, Ohio']
         return LambdaTest(lambdaFunction.handler).event({
             list: testJson["test"][1]["list"]
         }).expectResult( (result) =>{
@@ -40,7 +38,7 @@ describe('Weather Per City', function(){
             expect(result["List"][0]).to.have.property("Conditions")
             expect(result["List"][0]).to.have.property("Description")
             expect(result["List"][0]).to.have.property("Temperature")
-            expect(result["List"][0]["coordinates"]).to.equal(testJson["test"][0]["List"][0]["coordinates"])
+            expect(result["List"][0]["Coordinates"]).to.equal(testJson["test"][0]["List"][0]["coordinates"])
         });
     })
 
@@ -51,7 +49,6 @@ describe('Weather Per City', function(){
     it( 'send large directions set ~15', function(){
         //needed since 2000 ms isnt long enough to complete 15 requests
         this.timeout(10000)
-        const expectedResult = ['Columbus, Ohio', 'Indianapolis, Indiana', 'Vancouver, British Columbia', 'San Francisco, California', 'Boston, Massachusetts', 'San Diego, California', 'Los Angeles, California', 'Toronto, Ontario', 'Las Vegas, Nevada', 'Miami, Florida', 'Dallas, Texas', 'Phoenix, Arizona', 'Fort Wayne, Indiana', 'Toledo, Ohio', 'Detroit, Michigan']
         return LambdaTest(lambdaFunction.handler).event({
             list: testJson["test"][2]["list"]
         }).expectResult( (result) =>{
@@ -60,7 +57,7 @@ describe('Weather Per City', function(){
                 expect(result[index]).to.have.property("Conditions")
                 expect(result[index]).to.have.property("Description")
                 expect(result[index]).to.have.property("Temperature")
-                expect(result[index]["coordinates"]).to.equal(testJson["test"][2]["List"][index]["coordinates"])
+                expect(result[index]["Coordinates"]).to.equal(testJson["test"][2]["List"][index]["coordinates"])
             });
         });
     })
