@@ -38,7 +38,7 @@ describe('Weather Per City', function(){
             expect(result["List"][0]).to.have.property("Conditions")
             expect(result["List"][0]).to.have.property("Description")
             expect(result["List"][0]).to.have.property("Temperature")
-            expect(result["List"][0]["Coordinates"]).to.equal(testJson["test"][0]["List"][0]["coordinates"])
+            expect(result["List"][0]["Coordinates"]).to.equal(testJson["test"][1]["List"][0]["coordinates"])
         });
     })
 
