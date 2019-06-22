@@ -1,7 +1,7 @@
 {
-  "name": "intheclearbackend",
+  "name": "ReverseGeocode",
   "version": "1.0.0",
-  "description": "Backend for In The Clear",
+  "description": "Reverse geocode service for In The Clear",
   "main": "index.js",
   "scripts": {
     "test": "test"

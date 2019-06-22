@@ -1,7 +1,7 @@
 {
   "lambda": {
-    "role": "intheclearbackend-executor",
-    "name": "intheclearbackend",
+    "role": "ReverseGeocode-executor",
+    "name": "ReverseGeocode",
     "region": "us-east-1"
   }
 }
