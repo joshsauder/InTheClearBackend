@@ -18,7 +18,7 @@ describe('Weather Per City', function(){
         }).expectResult( (result) =>{
             expect(result["List"]).to.have.lengthOf(3)
             result["List"].array.forEach(element, index => {
-                expect(result[index]).to.have.property("Conditions")
+                expect(result[index]).to.have.property("Condition")
                 expect(result[index]).to.have.property("Description")
                 expect(result[index]).to.have.property("Temperature")
                 expect(result[index]["Coordinates"]).to.equal(testJson["test"][0]["List"][index]["coordinates"])
@@ -35,12 +35,12 @@ describe('Weather Per City', function(){
             list: testJson["test"][1]["list"]
         }).expectResult( (result) =>{
             expect(result["List"]).to.have.lengthOf(1)
-            expect(result["List"][0]).to.have.property("Conditions")
+            expect(result["List"][0]).to.have.property("Condition")
             expect(result["List"][0]).to.have.property("Description")
             expect(result["List"][0]).to.have.property("Temperature")
             expect(result["List"][0]["Coordinates"]).to.equal(testJson["test"][1]["List"][0]["coordinates"])
-        });
-    })
+        })
+    });
 
     /*
     In the case of a cross country trip, more coordinate sets will be sent.
@@ -54,11 +54,11 @@ describe('Weather Per City', function(){
         }).expectResult( (result) =>{
             expect(result["List"]).to.have.lengthOf(15)
             result["List"].array.forEach(element, index => {
-                expect(result[index]).to.have.property("Conditions")
+                expect(result[index]).to.have.property("Condition")
                 expect(result[index]).to.have.property("Description")
                 expect(result[index]).to.have.property("Temperature")
                 expect(result[index]["Coordinates"]).to.equal(testJson["test"][2]["List"][index]["coordinates"])
-            });
+            })
         });
     })
 })
