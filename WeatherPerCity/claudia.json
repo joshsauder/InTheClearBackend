@@ -1,0 +1,7 @@
+{
+  "lambda": {
+    "role": "WeatherPerCity-executor",
+    "name": "WeatherPerCity",
+    "region": "us-east-1"
+  }
+}
