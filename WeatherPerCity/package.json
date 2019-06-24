@@ -1,0 +1,16 @@
+{
+  "name": "weatherpercity",
+  "version": "1.0.0",
+  "description": "Weather Per City API Call for In The Clear",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.5",
+    "dotenv": "^8.0.0",
+    "request": "^2.88.0"
+  }
+}
