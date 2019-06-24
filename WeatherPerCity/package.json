@@ -1,12 +1,12 @@
 {
-  "name": "weatherpercity",
+  "name": "WeatherPerCity",
   "version": "1.0.0",
   "description": "Weather Per City API Call for In The Clear",
   "main": "index.js",
   "scripts": {
     "test": "test"
   },
-  "author": "",
+  "author": "Josh Sauder",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.5",
