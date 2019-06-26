@@ -5,6 +5,9 @@ var LambdaTest = require('lambda-tester');
 
 var lambdaFunction = require("../index");
 var testJson = require('./WeatherPerCity.json')
+require('dotenv').config({ path: '../process.env'})
+
+
 describe('Weather Per City', function(){
 
     /*
@@ -12,17 +15,27 @@ describe('Weather Per City', function(){
     Expect an JSON with 3 cities weather conditions to be returned
     */
     it( 'send normal directions set', function() {
+        //timeout needed since limit of 2000ms may not be enough for response
         this.timeout(3000)
         return LambdaTest(lambdaFunction.handler).event({
-            list: testJson["test"][0]["List"]
+            List: testJson["test"][0]["List"]
         }).expectResult( (result) =>{
-            expect(result["List"]).to.have.lengthOf(3)
-            result["List"].array.forEach(element, index => {
-                expect(result[index]).to.have.property("Condition")
-                expect(result[index]).to.have.property("Description")
-                expect(result[index]).to.have.property("Temperature")
-                expect(result[index]["Coordinates"]).to.equal(testJson["test"][0]["List"][index]["coordinates"])
-            });
+
+            //ensure correct number of list items are returned
+            expect(result).to.have.lengthOf(3)
+            for (var i = 0, len = result.length; i < len; i++){
+
+                //need to ensure the coordinates returned by Dark Sky are the same as requested
+                const coordinates = {}
+                coordinates["lat"] = testJson["test"][0]["List"][i]["lat"]
+                coordinates["long"] = testJson["test"][0]["List"][i]["long"]
+                expect(result[i]["Coordinates"]).to.eql(coordinates)
+
+                //ensure each propery is not undefined
+                expect(result[i]["Condition"]).to.not.be.undefined
+                expect(result[i]["Description"]).to.not.be.undefined
+                expect(result[i]["Temperature"]).to.not.be.undefined
+            };
         });
     });
 
@@ -32,13 +45,18 @@ describe('Weather Per City', function(){
     */
     it( 'send one direction set', function(){
         return LambdaTest(lambdaFunction.handler).event({
-            list: testJson["test"][1]["list"]
+            List: testJson["test"][1]["List"]
         }).expectResult( (result) =>{
-            expect(result["List"]).to.have.lengthOf(1)
-            expect(result["List"][0]).to.have.property("Condition")
-            expect(result["List"][0]).to.have.property("Description")
-            expect(result["List"][0]).to.have.property("Temperature")
-            expect(result["List"][0]["Coordinates"]).to.equal(testJson["test"][1]["List"][0]["coordinates"])
+
+            const coordinates = {}
+            coordinates["lat"] = testJson["test"][1]["List"][0]["lat"]
+            coordinates["long"] = testJson["test"][1]["List"][0]["long"]
+            expect(result[0]["Coordinates"]).to.eql(coordinates)
+
+            expect(result).to.have.lengthOf(1)
+            expect(result[0]["Condition"]).to.not.be.undefined
+            expect(result[0]["Description"]).to.not.be.undefined
+            expect(result[0]["Temperature"]).to.not.be.undefined
         })
     });
 
@@ -50,15 +68,21 @@ describe('Weather Per City', function(){
         //needed since 2000 ms isnt long enough to complete 15 requests
         this.timeout(10000)
         return LambdaTest(lambdaFunction.handler).event({
-            list: testJson["test"][2]["list"]
+            List: testJson["test"][2]["List"]
         }).expectResult( (result) =>{
-            expect(result["List"]).to.have.lengthOf(15)
-            result["List"].array.forEach(element, index => {
-                expect(result[index]).to.have.property("Condition")
-                expect(result[index]).to.have.property("Description")
-                expect(result[index]).to.have.property("Temperature")
-                expect(result[index]["Coordinates"]).to.equal(testJson["test"][2]["List"][index]["coordinates"])
-            })
+
+            expect(result).to.have.lengthOf(15)  
+            for (var i = 0, len = result.length; i < len; i++){
+
+                const coordinates = {}
+                coordinates["lat"] = testJson["test"][2]["List"][i]["lat"]
+                coordinates["long"] = testJson["test"][2]["List"][i]["long"]
+                expect(result[i]["Coordinates"]).to.eql(coordinates)
+
+                expect(result[i]["Condition"]).to.not.be.undefined
+                expect(result[i]["Description"]).to.not.be.undefined
+                expect(result[i]["Temperature"]).to.not.be.undefined
+            }
         });
     })
 })

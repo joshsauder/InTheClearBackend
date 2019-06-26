@@ -1,7 +1,6 @@
 'use strict'
 const request = require('request');
 const Promise = require('bluebird');
-require('dotenv').config();
 
 /**
  * @param event - API Gateway Lambda Proxy Input
@@ -15,10 +14,9 @@ exports.handler = function (event, context, callback) {
 
     function getWeather(lat, long, time){
         //long lat must be flipped since WGS84 format not used
-        responseJSON = `url/${long},${lat},${time}`
-
+        let fullURL = `${url}/${long},${lat},${time}`
         return new Promise(function(resolve, reject){
-            request.get(url, function(err, response, body){
+            request.get(fullURL, function(err, response, body){
                 if(err){
                     console.log(err)
                     reject(err)
@@ -43,15 +41,15 @@ exports.handler = function (event, context, callback) {
         const lat = item.lat
         const long = item.long
         const time = item.time
-        getWeather(lat, long, time)
+        return getWeather(lat, long, time)
     })
 
     Promise.all(actions).then(
         function(values){
-            weatherJSON = []
+            const weatherJSON = []
             values.forEach(function(value){
                 const list = {}
-                const instensity = value["currently"]["precipIntensity"]
+                const intensity = value["currently"]["precipIntensity"]
                 const type = value["currently"]["icon"]
 
                 list["Condition"] = type
@@ -61,14 +59,15 @@ exports.handler = function (event, context, callback) {
                 
                 const coordinates = {}
                 //flipped since different coordinates format used for Dark Sky
-                coordinates["lat"] = value["long"]
-                coordinates["long"] = value["lat"]
+                coordinates["lat"] = value["longitude"]
+                coordinates["long"] = value["latitude"]
                 list["Coordinates"] = coordinates
+                weatherJSON.push(list)
             })
             return weatherJSON
         }).then((weatherJSON) => {
-            callback(weatherJSON)
+            callback(null, weatherJSON)
         }).catch(error => {
-            callback(error)
+            callback(error.message)
         })
 }
