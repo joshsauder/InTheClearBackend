@@ -9,7 +9,7 @@ This backend is designed to reduce the number of API calls that the users device
 - [Claudia](https://claudiajs.com) - Used to deploy Lambda functions to AWS
 
 # Getting Started
-Go to [Dark Sky](https://darksky.net/dev) and create an API key. These keys can be created for free and allow for up to 1,000 free requests each month. Create a process.env file in the root directory and set API_KEY equal to the API key obtained from Dark Sky. You then need to download each NPM module from the package.json file. Once you have done this, you are all set! Please review the Mocha.js documentation in order to test each function, and the Claudia.js documentation in order to deploy each function to AWS.
+Go to [Dark Sky](https://darksky.net/dev) and create an API key. These keys can be created for free and allow for up to 1,000 free requests each month. Create a process.env file in the root directory and set API_KEY equal to the API key obtained from Dark Sky. You then need to download each NPM module from the package.json file. Finally, you will need to update the time fields in the event.json file. Please select a time in the future. You can obtain Unix times from the [website](https://www.unixtimestamp.com). Once you have done this, you are all set! Please review the Mocha.js documentation in order to test each function, and the Claudia.js documentation in order to deploy each function to AWS.
 
 # Feedback
 If you have any questions or would like to give me feedback, please email me at joshsauder@gmail.com!
