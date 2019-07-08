@@ -2,22 +2,24 @@
 
 var expect = require('chai').expect;
 var LambdaTest = require('lambda-tester');
-
 var lambdaFunction = require("../index");
 var testJson = require('./reverseGeocodeTest.json')
+var resultsVars = require('./reverseGeocode.results')
+require('dotenv').config({ path: '../process.env'})
+
 describe('Reverse GeoCode', function(){
 
     /*
-    Test a normal directions set. For this test 3 coordiantes will be inputted
-    Expect an array of 3 cities to be returned
+    Test a normal directions set. For this test 8 coordiantes will be inputted
+    Expect an array of 8 cities to be returned
     */
     it( 'send normal directions set', function() {
         this.timeout(3000)
-        const expectedResult = ['Columbus, Ohio', 'Indianapolis, Indiana', 'Vancouver, British Columbia']
+        const expectedResult = resultsVars.expectedNormalResult
         return LambdaTest(lambdaFunction.handler).event({
             list: testJson["test"][0]["list"]
         }).expectResult( (result) =>{
-            expect(result).to.have.lengthOf(3)
+            expect(result).to.have.lengthOf(8)
             //chai uses deep equality, so the below can be used
             expect(expectedResult).to.eql(result)
         });
@@ -28,7 +30,7 @@ describe('Reverse GeoCode', function(){
     Expect an array with one city to be returned
     */
     it( 'send one direction set', function(){
-        const expectedResult = ['Columbus, Ohio']
+        const expectedResult = resultsVars.expectedOneResult
         return LambdaTest(lambdaFunction.handler).event({
             list: testJson["test"][1]["list"]
         }).expectResult( (result) =>{
@@ -39,16 +41,16 @@ describe('Reverse GeoCode', function(){
 
     /*
     In the case of a cross country trip, more coordinate sets will be sent.
-    Expect an array of 15 cities to be returned
+    Expect an array of 20 cities to be returned
     */
-    it( 'send large directions set ~15', function(){
+    it( 'send large directions set =20', function(){
         //needed since 2000 ms isnt long enough to complete 15 requests
         this.timeout(10000)
-        const expectedResult = ['Columbus, Ohio', 'Indianapolis, Indiana', 'Vancouver, British Columbia', 'San Francisco, California', 'Boston, Massachusetts', 'San Diego, California', 'Los Angeles, California', 'Toronto, Ontario', 'Las Vegas, Nevada', 'Miami, Florida', 'Dallas, Texas', 'Phoenix, Arizona', 'Fort Wayne, Indiana', 'Toledo, Ohio', 'Detroit, Michigan']
+        const expectedResult = resultsVars.expectedLargeResult
         return LambdaTest(lambdaFunction.handler).event({
             list: testJson["test"][2]["list"]
         }).expectResult( (result) =>{
-            expect(result).to.have.lengthOf(15)
+            expect(result).to.have.lengthOf(20)
             expect(expectedResult).to.eql(result)
         });
     })

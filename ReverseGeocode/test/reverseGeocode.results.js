@@ -1,0 +1,31 @@
+exports.expectedNormalResult = ['Columbus, OH', 
+                        'Indianapolis, IN', 
+                        'Vancouver, BC',
+                        'San Francisco, CA', 
+                        'Boston, MA', 
+                        'San Diego, CA', 
+                        'Los Angeles, CA',
+                        'Toronto, ON']
+
+exports.expectedOneResult = ['Columbus, OH']
+
+exports.expectedLargeResult = ['Columbus, OH', 
+                        'Indianapolis, IN',
+                        'Indianapolis, IN',
+                        'Vancouver, BC', 
+                        'San Francisco, CA',
+                        'San Francisco, CA', 
+                        'Boston, MA', 
+                        'Boston, MA',
+                        'San Diego, CA', 
+                        'Los Angeles, CA', 
+                        'Los Angeles, CA',
+                        'Toronto, ON', 
+                        'Las Vegas, NV', 
+                        'Las Vegas, NV',
+                        'Miami, FL', 
+                        'Dallas, TX', 
+                        'Phoenix, AZ', 
+                        'Fort Wayne, IN', 
+                        'Toledo, OH', 
+                        'Detroit, MI']
