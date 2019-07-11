@@ -13,8 +13,8 @@ exports.handler = function (event, context, callback) {
     const coordianteList = event.List
 
     function getWeather(lat, long, time){
-        //long lat must be flipped since WGS84 format not used
-        let fullURL = `${url}/${long},${lat},${time}`
+
+        let fullURL = `${url}/${lat},${long},${time}`
         console.log(fullURL)
         return new Promise(function(resolve, reject){
             request.get(fullURL, function(err, response, body){
@@ -59,9 +59,9 @@ exports.handler = function (event, context, callback) {
                 list["Severe"] = determineSevere(intensity, type)
                 
                 const coordinates = {}
-                //flipped since different coordinates format used for Dark Sky
-                coordinates["lat"] = value["longitude"]
-                coordinates["long"] = value["latitude"]
+                //return coordinates for verification purposes
+                coordinates["long"] = value["longitude"]
+                coordinates["lat"] = value["latitude"]
                 list["Coordinates"] = coordinates
                 weatherJSON.push(list)
             })
