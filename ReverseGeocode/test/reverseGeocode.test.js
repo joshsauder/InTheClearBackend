@@ -17,7 +17,7 @@ describe('Reverse GeoCode', function(){
         this.timeout(3000)
         const expectedResult = resultsVars.expectedNormalResult
         return LambdaTest(lambdaFunction.handler).event({
-            list: testJson["test"][0]["list"]
+            list: testJson["test"][0]["List"]
         }).expectResult( (result) =>{
             expect(result).to.have.lengthOf(8)
             //chai uses deep equality, so the below can be used
@@ -32,7 +32,7 @@ describe('Reverse GeoCode', function(){
     it( 'send one direction set', function(){
         const expectedResult = resultsVars.expectedOneResult
         return LambdaTest(lambdaFunction.handler).event({
-            list: testJson["test"][1]["list"]
+            list: testJson["test"][1]["List"]
         }).expectResult( (result) =>{
             expect(result).to.have.lengthOf(1)
             expect(expectedResult).to.eql(result)
@@ -48,7 +48,7 @@ describe('Reverse GeoCode', function(){
         this.timeout(10000)
         const expectedResult = resultsVars.expectedLargeResult
         return LambdaTest(lambdaFunction.handler).event({
-            list: testJson["test"][2]["list"]
+            list: testJson["test"][2]["List"]
         }).expectResult( (result) =>{
             expect(result).to.have.lengthOf(20)
             expect(expectedResult).to.eql(result)

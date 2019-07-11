@@ -10,7 +10,7 @@ exports.handler = function (event, context, callback) {
     const id = process.env.APP_ID
     const code = process.env.APP_CODE
     const requestUrl = `https://reverse.geocoder.api.here.com/6.2/multi-reversegeocode.json?mode=retrieveAddresses&gen=9&app_id=${id}&app_code=${code}`
-    const coordinatesList = event.list
+    const coordinatesList = event.List
 
     /**
      * Create a promise object that is used to batch request each coordinate set
