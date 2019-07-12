@@ -80,7 +80,7 @@ exports.handler = function (event, context, callback) {
             coordinatesArray.forEach(function(value){
                 //parse down to point where city and state can be obtained
                 let parsedJSON = value['Result'][0]['Location']['Address']
-                var city = parsedJSON['City']
+                var city = parsedJSON.hasOwnProperty('City') ? parsedJSON['City'] : parsedJSON['County']
                 var state = parsedJSON['State']
                 cityList.push(`${city}, ${state}`)
             })
