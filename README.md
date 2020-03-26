@@ -1,6 +1,6 @@
 # In The Clear Backend
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 This backend is designed to reduce the number of API calls that the users device (iPhone or iPad) has to make. A request from Columbus, OH to Los Angeles, CA would require upwards of 30 API calls between the weather and reverse geolocation services, and as you can imagine, used up much of the devices CPU. With AWS Lambda, I'm able to process all these requests in less than 5 seconds (before it took >10 seconds) and greatly reduce the amount of the devices CPU usage. This backend features two separate functions and is deployed on AWS.
 
