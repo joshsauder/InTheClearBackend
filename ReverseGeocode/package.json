@@ -11,7 +11,7 @@
   "devDependencies": {
     "claudia": "^5.5.0",
     "lambda-tester": "^3.6.0",
-    "mocha": "^6.1.4"
+    "mocha": "^10.2.0"
   },
   "dependencies": {
     "bluebird": "^3.5.5",
